@@ -1,0 +1,277 @@
+pwd #print working directory
+ls # list the files in this directory
+
+diff game_old.txt game_new.txt   #short 
+diff -u  ' old' ' new '          #long
+
+cd ~
+mkdir version-control
+cd version-control
+mkdir reflection
+cd reflection
+subl lesson1_relections.txt
+
+sudo sdd-apt-repository ppa:webupd8team/sublime-text-3 \
+    && sudo apt-get update \
+    && sudo apt-get install sublime-text-installer
+
+sudo apt update
+sudo apt upgrade
+
+#How could having easy access to the entire history of a file
+#make you a more efficient programmer in the long term?
+
+'''
+clear changes and
+easy to roll-back
+'''
+
+# At regular intervals
+# Whenever a large enough change is made(e.g 50 lines of code)
+# Whenever there is a long pause in editing
+# When you choose to save a version
+
+Commits -- basic building blocks
+
+Concept map
+
+
+Version control
+    Git
+        Commit
+            git diff
+
+
+
+git log    # lists all commits and their comments
+git diff   # like diff on linux and FC on windows
+
+    git diff ac83.... 7592....    #these Hexes are the ids of
+                                  #the two commits
+# Rule of thumb:
+# make a commit per logical change
+# e.g. 3 typos :  1 commit
+#      a later found bug -2nd commit  : don't put them together
+#
+
+#What do you think are the pros and cons of manually choosing
+#when to create a commit, like you do in Git, vs having 
+#versions automatically saved, like Google docs does?
+
+'''
+avoids over-saving
+need to remember when to save
+'''
+
+# Tracking acrosss files together, 
+# rather than multiple files separately.
+# these files could be inter-related.
+# e.g. html and css files that make up a webpage
+#      a novel, which makes a few chapters and sections.
+
+
+Repository
+    file1(new)
+    file2(could be a reference of older version)
+    ...
+    fileN(new or old)
+
+
+# Jeffrey Middleton@Google
+# use git to break up into several files(modules)
+# divide work into several steps
+# move forward, or backward to get mistakes fixed.
+
+git --version
+
+# clone --download the entire history
+git clone https://github.com/udacity/asteroids.git
+
+git config --global color.ui auto
+
+
+# Use git log and git diff to view the difference of files.
+#
+
+#re-try
+git log
+git diff    <old_id> <new_id>
+git diff df035382c41b4d0cda86a1aa30b53f15bef05b5 \ 25ede836903881848fea811df5b687b59d962da3
+
+git show
+git show b0678b161fcf74467ed3a63110557e3d6229cfa6
+#then press down_arrow to scroll the list
+
+# Git
+      repo
+          clone
+
+          commits( <--> log)
+              diff
+
+
+# weird error messages:
+'''    
+    should not be doing an octopus
+    -- a strategy that git uses to combine many diff versions
+       of code together.
+
+    you are in 'detached HEAD' state
+    --  HEAD is the reference to the current working commit
+        we can 'detach' HEAD and switch to an older commit
+'''
+
+
+# Check out previous commits:
+# reseting all the files to the previous version of commit.
+
+git checkout -b b0678b161fcf74467ed3a63110557e3d6229cfa6 
+# created the a branch by mistake 
+# --this is just a reference
+
+git log
+git branch
+
+git checkout master
+git branch -D b0678b161fcf74467ed3a63110557e3d6229cfa6
+# just deleted the reference.
+
+# now the corrected commit to checkout
+git checkout b0678b161fcf74467ed3a63110557e3d6229cfa6
+
+
+# prompt: 
+'''
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state
+'''
+
+# check: the index.html and the game plays well.(No bug)
+# ----> go checkout a newer version of commit
+
+
+# now to figure out which commit has the bug originated from
+git checkout 4035769377cce96a88d5c1167079e12f30492391
+
+# found: the bug is in this commit
+# go check if it appeared at a time older than this commit
+
+git checkout 25ede836903881848fea811df5b687b59d962da3
+# found: bug still there, must be another older commit
+
+git checkout df035382c41b4d0cda86a1aa30b53f15bef05b53
+# found: bug NOT here. 
+
+# Now figure out the difference between the two versions\
+# ending with ('da3' and 'b53')
+
+git diff df035382c41b4d0cda86a1aa30b53f15bef05b53 25ede836903881848fea811df5b687b59d962da3
+
+# version control gives the confidence to make changes that 
+# might break something
+
+# without version control, as long as the code is working
+# we tend to make as little changes as possible
+# with version control, we're able to rethink the entire
+# code base or architect structure. no fear of breaking it.
+
+# allowed to explore deep concepts that wouldn't have been
+# able to explore easily.
+
+
+# now setting up bash config-s for auto-completion(already)
+#     and for windows and mac
+# skipped, not necessary for ubuntu
+
+
+# quizzes: git log, git checkout for multiple files,
+# new git to clone: puppu-pakia.git
+# most recent commit: just in case forgot,
+  fa4c6bade4970c282b3870ad16f1bde8164663a9
+
+
+
+# checked out c12dc49709452bcfb6084b3cc7dc86042cb78ca3
+# found it is working well(go check a newer one)
+
+
+# checked out 547f4171a82ec6429d002c1acef357aec41d3f17
+# found it has the bug(go check an older one)
+
+
+# checked out 003c8c197cd3b1e5b28b58f53ee14d7ebaa9bb3a
+# found it is working well(go check a newer one)
+
+# checked out 7c81b8021ec16c5c7b240220314d01200957d605
+# found it is working well(go check a newer one)
+
+# 71d52709ddc4066e7a79a1d0a412e43429a0cdeb
+# found it is working well(got check a newer one)
+
+# must be the commit 547f417d
+git checkout 547f4171a82ec6429d002c1acef357aec41d3f17
+# to see what changed..
+git show
+
+''' 
+utils.intersect = function(bounds1, bounds2) {
+
+### here 2nd line and 4th line of '||-statements'
+### are due to symmetry, think about rectangles..
+-
+-    return !(
+-      bounds1.end_x < bounds2.start_x ||
+-      bounds2.end_x < bounds1.start_x ||
+-      bounds1.end_y < bounds2.start_y ||
+-      bounds2.end_y < bounds1.start_y
+-    );
+-
+
++    if (bounds1.end_x < bounds2.start_x) {
++        return true;
++    }
++    if (bounds2.end_x < bounds1.start_x) {
++        return true;
++    }
++    if (bounds1.end_y < bounds2.start_y) {
++        return true;
++    }
++    if (bounds2.end_y < bounds1.start_y) {
++        return true;
++    }
++    return false;
+   };
+
+'''
+ 
+# Now go to check ANOTHER bug about the berries
+
+# hint: pappu eats berries without separating into
+#                                  3 pappus..
+# 003c8c197cd3b1e5b28b58f53ee14d7ebaa9bb3a
+
+
+# I have modified local warehouse util.js file,
+# warehouse now is "dirty"..
+# then to checkout, need to use 
+git checkout -help
+git checkout -f <ID>
+git checkout -f 003c8c197cd3b1e5b28b58f53ee14d7ebaa9bb3a
+
+# the bug is there
+# the searching time for the buggy code suggests
+# that we make one commit per logical change
+# AND give each commit a good message(for..git log..).
+
+'''
+-        clone.x += utils.randomNumber(5, 10);
+-        clone.y += utils.randomNumber(-20, 20);
++        clone.x += utils.randomNumber(500, 1000);
++        clone.y += utils.randomNumber(-2000, 2000);
+'''
+
+# the last two lines means that the clone moves too
+# fast before even noticed by human-player.
+
+
