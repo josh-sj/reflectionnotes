@@ -1,0 +1,110 @@
+# solo projects on PC
+
+repositories
+    asteroids
+        index.html
+        index.css
+        game.js
+        ...
+        ...
+        .git
+            config
+            objects
+            ...
+            and meta-data of the history of asteroids
+
+
+
+# now try init a new repo
+cd ..
+mkdir recipes
+cd recipes
+
+>cake-recipe.txt
+>frosting-recipe.txt
+>chili-recipe.txt
+git init
+
+# now the repo has 0 commits
+git log
+git status #(to see which files have changed)
+
+# shows:
+'''
+位于分支 master
+
+初始提交
+
+未跟踪的文件:
+  （使用 "git add <文件>..." 以包含要提交的内容）
+
+	cake-recipe.txt
+	chili-recipe.txt
+	frosting-recipe.txt
+
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+'''
+
+# QUIZ initialize reflection folder, 
+# now goes to reflection folder
+cd..
+cd reflections
+git init
+
+git status
+'''
+位于分支 master
+
+初始提交
+
+未跟踪的文件:
+  （使用 "git add <文件>..." 以包含要提交的内容）
+
+	lesson1_reflections.txt
+	lesson2_reflections.txt
+
+提交为空，但是存在尚未跟踪的文件（使用 "git add" 建立跟踪）
+
+'''
+
+# choosing what changes to commit
+# WORKING DIRECTORY   \\   STAGING AREA  \\   REPOSITORY
+#
+
+                     git add                git commit
+                                                commit  
+#   cake.txt                cake.txt 
+#   frosting.txt            frosting.txt
+#   chili.txt              
+
+git add cake-recipe.txt
+git add frosting-recipe.txt
+git status
+
+'''
+要提交的变更：
+  （使用 "git rm --cached <文件>..." 以取消暂存）
+
+	新文件：   cake-recipe.txt
+	新文件：   frosting-recipe.txt
+
+未跟踪的文件:
+  （使用 "git add <文件>..." 以包含要提交的内容）
+
+	chili-recipe.txt
+
+'''
+
+# quiz
+cd ~/version-control/reflections
+git add lesson1_reflections.txt
+
+# How is the staging area different from the working 
+# directory and the repository? what value it offers?
+
+# About to make a first commit into the reflection repo
+# need to write a commit message
+git commit -m "the chapter1 notes added"
+git status
+git show
+
