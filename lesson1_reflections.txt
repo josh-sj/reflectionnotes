@@ -51,7 +51,8 @@ git diff   # like diff on linux and FC on windows
 # Rule of thumb:
 # make a commit per logical change
 # e.g. 3 typos :  1 commit
-#      a later found bug -2nd commit  : don't put them together
+#      a later found bug -2nd commit  : don't put them 
+#                                       together
 #
 
 #What do you think are the pros and cons of manually choosing
@@ -151,7 +152,7 @@ state
 # ----> go checkout a newer version of commit
 
 
-# now to figure out which commit has the bug originated from
+# now to figure out which commit has the bug originated from,
 git checkout 4035769377cce96a88d5c1167079e12f30492391
 
 # found: the bug is in this commit
@@ -180,7 +181,7 @@ git diff df035382c41b4d0cda86a1aa30b53f15bef05b53 25ede836903881848fea811df5b687
 # able to explore easily.
 
 
-# now setting up bash config-s for auto-completion(already)
+# now setting up bash configs for auto-completion(already)
 #     and for windows and mac
 # skipped, not necessary for ubuntu
 
