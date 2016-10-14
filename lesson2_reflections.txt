@@ -108,3 +108,222 @@ git commit -m "the chapter1 notes added"
 git status
 git show
 
+
+# commit the recipes folder
+# way(style) of writing commit
+git commit -m "Add a cake and frosting recipe"
+git log
+
+
+######################
+# now use git diff to see diff between from staging area to 
+# working directory(* presumably dirty right now).
+
+# modify game.js  now it is changed... NOT ADDED to staging 
+# git diff  shows working directory <-----staging area
+
+# modify index.html now it is changed... NOT
+
+git status
+'''
+头指针分离于 25ede83
+尚未暂存以备提交的变更：
+  （使用 "git add <文件>..." 更新要提交的内容）
+  （使用 "git checkout -- <文件>..." 丢弃工作区的改动）
+
+	修改：     game.js
+	修改：     index.html
+
+修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
+'''
+
+git add game.js
+git diff            #only shows changes made to index.html
+                    #since it is diff from working to staging
+                    #in working, not in staging(not added)
+git diff --staged   #changes made to game.js
+                    #in staging area, but not in repo.
+
+
+# use git diff --staged to see diff between from repository
+# to the staged area(* presumably dirty right now).
+
+git diff --staged   #shows nothing, as game.js is in 
+                    #staging area and also in repo....
+
+git diff            #shows that same thing, index.html
+
+# now I don't want the changes in index.html
+# use 
+git reset --hard   #(DANGEROUS, once done, can't undone.)
+
+# to discard changes in either working or staging area.
+
+
+#How can you use the staging area to make sure you have
+# one commit per logical change?
+# put one change in one file ONLY    into the staging area
+# and then git commit that one change.
+
+
+###########
+# branching
+git branch
+
+git branch easy-mode
+git branch
+
+git checkout easy-mode
+git branch
+
+# then modify game.js
+# fragments from 3 to 2
+
+git add game.js
+git commit
+# put a commit message.
+
+# Question:
+# What are some situations when branches would be helpful in
+# keeping your history organized? How would branch help?
+# my ANS: can try out few other functions without disturbing
+# the main course of development(master).
+
+# Mike Wales@udacity: use branch when moving on to a 
+#                     different piece of work,
+#                     think of it as context switch,
+#                     switching on new feature, or
+#                     going to correct a bug.
+
+#                     master branch is production quality
+#                     branch that never breaks, always works.
+
+# every collaborator can work on a branch 
+# (a new feature, a bug fix), they can each checkout their 
+# branch after taking a break, without worring about the
+# master branch have changed up from under their previous work
+
+# when done on one branch,
+# then either, (if master hasn't changed), 
+#              let master be this branch;
+#      or, (if master has changed), let master and this branch
+#          MERGE.
+
+git checkout coins  
+# remote branch
+
+git log --graph --oneline master coins
+# master and coin branch are lined-up like 
+# a tree shape(root on ground-meaning the beginning of time)
+
+
+git log --graph --oneline master coins easy-mode
+# a tree with three branches( 
+#             their tips are arranged by time) 
+
+##
+# if we DIDNOT create a new 'easy-mode' branch,
+# then if we finished it AND switch to 'master'
+# it would be like, the easy-mode branch is NOT SAVED, and
+# like it never existed.
+
+##
+# so, it is important to create branch, to retrain changes
+# made to a particular commit.
+
+git branch new_branch_name         #create new_branch
+git checkout new_branch_name       #check out
+# OR equivalently,
+git checkout -b new_branch_name    #short-cut
+
+
+# Question:
+# How do the diagrams help you visualize the branch structure?
+# By time-marks of the tips of the branches.
+
+
+# now try to merge coins and master
+git branch
+git checkout master
+git merge master coins   # too simple, too naive
+##
+# merge conflict..!!
+
+roll-back
+git merge --help
+git merge --abort
+
+git checkout master
+# we want to fix the delay bug
+# so that we can shoot a bullet after a given time.
+
+
+# now fix the bug by adding the line: 
+# this.delayBeforeBullet = 10;
+# <blank line of code>
+
+# git add
+# git commit
+
+this.delayBeforeBullet = 10;
+
+git add game.js
+git commit
+
+
+# bug fixed.
+# now merge, coins into master
+
+git checkout master
+git merge master coins
+
+# still has the merge conflict problem
+# couldn't figure it out
+# found on stackoverflow:
+
+# the newly added line must NOT be followed by a 
+# blank line, otherwise there will be conflict.
+
+
+git merge --abort
+vi game.js
+git status
+# modify and remove the blank line
+
+git add game.js
+git commit
+
+git merge master coins
+
+# now it worked
+
+# however, there is an interesting side-effect
+'''
+commit 4035769377cce96a88d5c1167079e12f30492391
+Author: Doug McInnes <doug@dougmcinnes.com>
+Date:   Wed Jun 9 21:04:32 2010 -0700
+
+    frame interval was set wrong after game was paused
+
+commit 354dfdd530b1631a2834b2e9e242d31e625c9c13
+Author: Sarah Spikes <sarah@udacity.com>
+Date:   Tue Jun 1 13:06:52 2010 -0700
+
+    Make ships able to spawn on coins
+'''
+
+# the above two commits are not child/parent
+# only arrange by time.
+git show <commitID>    # will show their real parent(original)
+                       # before the merge
+
+# the coins ref is still pointing to the original branch.
+git branch -d coins    # delete the ref(label)
+
+git log --graph --oneline
+git branch -a
+git branch -r
+
+# modify the color of coin to be yellow
+# git add game.js
+ git commit -m "Make coins yellow"
