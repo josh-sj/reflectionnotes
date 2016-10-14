@@ -1,0 +1,2 @@
+git remote set-url <old_name><new_ssh_url><old_https_url>
+
